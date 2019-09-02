@@ -1,0 +1,1 @@
+export { getDatabaseConnection } from './connection';

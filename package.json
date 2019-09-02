@@ -1,0 +1,27 @@
+{
+  "name": "@cookyer/sdk",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "lerna": "lerna",
+    "clean": "lerna clean -y && lerna bootstrap",
+    "start": "lerna run start:dev --stream --parallel",
+    "start:admin": "lerna run --no-prefix --stream --scope @cookyer/admin start:dev",
+    "test": "lerna run test --stream --parallel",
+    "test:db": "lerna run --no-prefix --stream --scope @cookyer/database test"
+  },
+  "devDependencies": {
+    "@types/node": "^12.7.2",
+    "@types/jest": "22.2.3",
+    "jest": "^24.9.0",
+    "ts-jest": "24.0.2",
+    "lerna": "^3.15.0",
+    "ts-node": "^8.3.0",
+    "cross-env": "5.2.0"
+  },
+  "dependencies": {
+    "typescript": "^3.5.3"
+  }
+}

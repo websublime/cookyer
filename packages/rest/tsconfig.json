@@ -1,0 +1,25 @@
+{
+  "extends": "../../tsconfig.base",
+  "compilerOptions": {
+    "target": "es2016",
+    "lib": [
+      "es2016"
+    ],
+    "typeRoots": [
+      "../../node_modules/@types",
+      "node_modules/@types"
+    ],
+    "outDir": "./dist",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "allowSyntheticDefaultImports": true
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "include": [
+    "./lib"
+  ]
+}
