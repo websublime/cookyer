@@ -1,0 +1,72 @@
+version: '3'
+
+networks:
+  frontend:
+    driver: ${NETWORKS_DRIVER}
+  backend:
+    driver: ${NETWORKS_DRIVER}
+
+volumes:
+  postgres:
+    driver: ${VOLUMES_DRIVER}
+  redis:
+    driver: ${VOLUMES_DRIVER}
+  minio:
+    driver: ${VOLUMES_DRIVER}
+
+services:
+  database:
+    restart: 'always'
+    build: './database'
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=cookyer
+    #    volumes:
+    #      - ${DATA_PATH_HOST}/postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD', 'pg_isready', '-U', 'postgres']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    ports:
+      - 5432:5432
+    expose:
+      - 5432
+    container_name: database
+    networks:
+      - backend
+
+  mosquitto:
+    image: nazt/mosquitto:1.4.9
+    volumes:
+      - $PWD/configs/mosquitto.conf:/mosquitto/mosquitto.conf
+      - ${DATA_PATH_HOST}/mosquito:/data
+    ports:
+      - ${MOSQUITTO_SECURE_PORT}:9001
+      - ${MOSQUITTO_PORT}:1883
+    expose:
+      - 9001
+      - 1883
+    container_name: mosquitto
+    networks:
+      - backend
+
+  minio:
+    build: ./minio
+    command: >
+      sh -c 'dockerize -wait tcp://mosquitto:1883'
+    volumes:
+      - ${DATA_PATH_HOST}/minio/data:/export
+      - ${DATA_PATH_HOST}/minio/config:/root/.minio
+    ports:
+      - '${MINIO_PORT}:9000'
+    expose:
+      - 9000
+    environment:
+      - MINIO_ACCESS_KEY=access
+      - MINIO_SECRET_KEY=secretkey
+      - MINIO_BROWSER=on
+    networks:
+      - frontend
+      - backend
+    container_name: minio

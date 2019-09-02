@@ -1,0 +1,13 @@
+{
+  "mqtt": {
+    "1": {
+      "enable": true,
+      "broker": "tcp://localhost:1883",
+      "topic": "minio",
+      "qos": 1,
+      "clientId": "minio",
+      "username": "",
+      "password": ""
+    }
+  }
+}
