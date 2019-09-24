@@ -16,12 +16,12 @@ describe('> Language Repository', () => {
         host: 'localhost',
         user: 'postgres',
         password: '',
-        database: 'cookyer'
+        database: 'cookyer',
       },
       pool: {
         min: 2,
-        max: 10
-      }
+        max: 10,
+      },
     });
 
     repository = new LanguageRepository();
@@ -35,11 +35,9 @@ describe('> Language Repository', () => {
   });
 
   it('# Should find language by id', async () => {
-    const rs = await repository.findById(
-      '3119edf4-4a69-456f-baea-42f49612e2bf'
-    );
+    const rs = await repository.findById('62110f72-a274-4e8d-8e02-965e36b7edff');
 
-    expect(rs.code).toEqual('pt-PT');
+    expect(rs.code).toEqual('pt');
   });
 
   it('# Should find all languages', async () => {
@@ -49,19 +47,19 @@ describe('> Language Repository', () => {
   });
 
   it('# Should find language by code', async () => {
-    const rs = await repository.findByCode('pt-PT');
+    const rs = await repository.findByCode('pt');
 
-    expect(rs.code).toEqual('pt-PT');
+    expect(rs.code).toEqual('pt');
   });
 
   it('# Should find by field', async () => {
-    const rs = await repository.find('code', 'pt-PT', '!=');
+    const rs = await repository.find('code', 'pt', '!=');
 
     expect(rs.length).toBeGreaterThan(0);
   });
 
   it('# Should have virtual dates', async () => {
-    const rs = await repository.findByCode('pt-PT');
+    const rs = await repository.findByCode('pt');
 
     expect(rs.updatedOn < new Date()).toBeTruthy();
     expect(rs.createdOn < new Date()).toBeTruthy();

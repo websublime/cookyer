@@ -11,24 +11,28 @@ describe('> Food Repository', () => {
         host: 'localhost',
         user: 'postgres',
         password: '',
-        database: 'cookyer'
+        database: 'cookyer',
       },
       pool: {
         min: 2,
-        max: 10
-      }
+        max: 10,
+      },
     });
 
     repository = new FoodRepository();
   });
 
   it('# Should find food by ID', async () => {
-    const rs = await repository.findById(
-      'b802e23b-8a4e-4f56-8766-081d1007085d'
-    );
+    const rs = await repository.findById('8c7df2a5-305e-4252-b623-7f518b0fb032');
 
-    console.log(rs);
+    const food = {
+      uuid: 'b18b0631-5214-4065-837d-09c6a6343a76',
+      name: 'Abacate',
+      description: 'Abacate',
+      lang_code: 'pt',
+      food_uid: '8c7df2a5-305e-4252-b623-7f518b0fb032',
+    };
 
-    expect(true).toBeTruthy();
+    expect(rs).toEqual(food);
   });
 });
