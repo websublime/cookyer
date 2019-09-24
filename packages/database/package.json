@@ -20,6 +20,7 @@
     "access": "public"
   },
   "scripts": {
+    "build": "cross-env NODE_ENV=production tsc -p tsconfig.json",
     "start:dev": "cross-env NODE_ENV=development tsc -w -p tsconfig.json",
     "test": "cross-env NODE_ENV=testing jest --coverage"
   },

@@ -1,0 +1,21 @@
+title: Language
+type: object
+description: System languages
+x-examples:
+  Data Example:
+    uuid: 613022a3-aec6-4ff0-9ecb-9b019de87e6b
+    code: pt
+    name: Portugues
+    created_at: '2019-08-23 23:44:32.289733'
+    updated_at: '2019-08-23 23:44:32.289733'
+properties:
+  uuid:
+    type: string
+  code:
+    type: string
+  created_at:
+    type: string
+  updated_at:
+    type: string
+  name:
+    type: string

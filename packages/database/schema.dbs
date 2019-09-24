@@ -1,155 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <project name="cookyer" id="Project_2c90e3a" template="Default" database="PostgreSQL" >
 	<schema name="public" catalogname="cookyer" schemaname="public" >
-		<table name="cook_cholesterol" >
-			<column name="uuid" type="uuid" decimal="0" jt="1111" mandatory="y" >
+		<table name="cook_component" >
+			<column name="uuid" type="uuid" jt="1111" mandatory="y" >
 				<defo>uuid_generate_v4()</defo>
 			</column>
-			<column name="for_value" type="real" length="8" decimal="8" jt="7" >
-				<defo>0</defo>
+			<column name="created_at" type="timestamptz" jt="93" >
+				<defo>current_timestamp</defo>
 			</column>
-			<column name="recommendation" type="real" length="8" decimal="8" jt="7" >
-				<defo>0</defo>
+			<column name="updated_at" type="timestamptz" jt="93" >
+				<defo>current_timestamp</defo>
 			</column>
-			<column name="unit_uid" type="uuid" decimal="0" jt="1111" mandatory="y" />
-			<column name="food_uid" type="uuid" decimal="0" jt="1111" mandatory="y" />
-			<column name="created_at" type="timestamptz" length="35" decimal="6" jt="93" >
-				<defo>CURRENT_TIMESTAMP</defo>
-			</column>
-			<column name="updated_at" type="timestamptz" length="35" decimal="6" jt="93" >
-				<defo>CURRENT_TIMESTAMP</defo>
-			</column>
-			<index name="pk_cook_cholesterol_uuid" unique="PRIMARY_KEY" >
+			<index name="pk_cook_component_uuid" unique="PRIMARY_KEY" >
 				<column name="uuid" />
 			</index>
-			<fk name="fk_cook_cholesterol_cook_food" to_schema="public" to_table="cook_food" >
-				<fk_column name="food_uid" pk="uuid" />
-			</fk>
-			<fk name="fk_cook_cholesterol_cook_unit" to_schema="public" to_table="cook_unit" >
-				<fk_column name="unit_uid" pk="uuid" />
-			</fk>
 		</table>
-		<table name="cook_cholesterol_description" >
-			<column name="uuid" type="uuid" decimal="0" jt="1111" mandatory="y" >
+		<table name="cook_component_description" >
+			<column name="uuid" type="uuid" jt="1111" mandatory="y" >
 				<defo>uuid_generate_v4()</defo>
 			</column>
-			<column name="name" type="varchar" length="255" decimal="0" jt="12" />
-			<column name="lang_code" type="varchar" length="20" decimal="0" jt="12" mandatory="y" />
-			<column name="cholesterol_uid" type="uuid" decimal="0" jt="1111" mandatory="y" />
-			<index name="pk_cook_cholesterol_description_uuid" unique="PRIMARY_KEY" >
+			<column name="name" type="varchar" length="255" jt="12" mandatory="y" />
+			<column name="lang_code" type="varchar" length="10" jt="12" mandatory="y" />
+			<column name="component_uid" type="uuid" jt="1111" mandatory="y" />
+			<index name="pk_cook_component_description_uuid" unique="PRIMARY_KEY" >
 				<column name="uuid" />
 			</index>
-			<fk name="fk_cook_cholesterol_description_uid" to_schema="public" to_table="cook_cholesterol" >
-				<fk_column name="cholesterol_uid" pk="uuid" />
-			</fk>
-			<fk name="fk_cook_cholesterol_description_lang" to_schema="public" to_table="cook_language" >
+			<fk name="fk_cook_component_description_lang" to_schema="public" to_table="cook_language" >
 				<fk_column name="lang_code" pk="code" />
 			</fk>
-		</table>
-		<table name="cook_energy" >
-			<column name="uuid" type="uuid" decimal="0" jt="1111" mandatory="y" >
-				<defo>uuid_generate_v4()</defo>
-			</column>
-			<column name="energy" type="integer" length="10" decimal="0" jt="4" mandatory="y" >
-				<defo>0</defo>
-			</column>
-			<column name="recomendation" type="integer" length="10" decimal="0" jt="4" >
-				<defo>0</defo>
-			</column>
-			<column name="unit_uid" type="uuid" decimal="0" jt="1111" mandatory="y" />
-			<column name="food_uid" type="uuid" decimal="0" jt="1111" mandatory="y" />
-			<column name="created_at" type="timestamptz" length="35" decimal="6" jt="93" >
-				<defo>CURRENT_TIMESTAMP</defo>
-			</column>
-			<column name="updated_at" type="timestamptz" length="35" decimal="6" jt="93" >
-				<defo>CURRENT_TIMESTAMP</defo>
-			</column>
-			<index name="pk_cook_energy_uuid" unique="PRIMARY_KEY" >
-				<column name="uuid" />
-			</index>
-			<fk name="fk_cook_energy_cook_food" to_schema="public" to_table="cook_food" >
-				<fk_column name="food_uid" pk="uuid" />
-			</fk>
-			<fk name="fk_cook_energy_cook_unit" to_schema="public" to_table="cook_unit" >
-				<fk_column name="unit_uid" pk="uuid" />
-			</fk>
-		</table>
-		<table name="cook_energy_distribution" >
-			<column name="uuid" type="uuid" decimal="0" jt="1111" mandatory="y" >
-				<defo>uuid_generate_v4()</defo>
-			</column>
-			<column name="alcohol" type="integer" length="10" decimal="0" jt="4" >
-				<defo>0</defo>
-			</column>
-			<column name="protein" type="integer" length="10" decimal="0" jt="4" >
-				<defo>0</defo>
-			</column>
-			<column name="fat" type="integer" length="10" decimal="0" jt="4" >
-				<defo>0</defo>
-			</column>
-			<column name="cardohydrate" type="integer" length="10" decimal="0" jt="4" >
-				<defo>0</defo>
-			</column>
-			<column name="organic_acid" type="integer" length="10" decimal="0" jt="4" >
-				<defo>0</defo>
-			</column>
-			<column name="food_uid" type="uuid" decimal="0" jt="1111" mandatory="y" />
-			<column name="created_at" type="timestamptz" length="35" decimal="6" jt="93" >
-				<defo>CURRENT_TIMESTAMP</defo>
-			</column>
-			<column name="updated_at" type="timestamptz" length="35" decimal="6" jt="93" >
-				<defo>CURRENT_DATE</defo>
-			</column>
-			<index name="pk_cook_energy_distribution_uuid" unique="PRIMARY_KEY" >
-				<column name="uuid" />
-			</index>
-			<fk name="fk_cook_energy_distribution" to_schema="public" to_table="cook_food" >
-				<fk_column name="food_uid" pk="uuid" />
-			</fk>
-		</table>
-		<table name="cook_fatty_acids" >
-			<column name="uuid" type="uuid" decimal="0" jt="1111" mandatory="y" >
-				<defo>uuid_generate_v4()</defo>
-			</column>
-			<column name="for_value" type="real" length="8" decimal="8" jt="7" >
-				<defo>0</defo>
-			</column>
-			<column name="recomendation" type="real" length="8" decimal="8" jt="7" >
-				<defo>0</defo>
-			</column>
-			<column name="unit_uid" type="uuid" decimal="0" jt="1111" mandatory="y" />
-			<column name="food_uid" type="uuid" decimal="0" jt="1111" mandatory="y" />
-			<column name="created_at" type="timestamptz" length="35" decimal="6" jt="93" >
-				<defo>CURRENT_TIMESTAMP</defo>
-			</column>
-			<column name="updated_at" type="timestamptz" length="35" decimal="6" jt="93" >
-				<defo>CURRENT_TIMESTAMP</defo>
-			</column>
-			<index name="pk_cook_fatty_acids_uuid" unique="PRIMARY_KEY" >
-				<column name="uuid" />
-			</index>
-			<fk name="fk_cook_fatty_acids_cook_food" to_schema="public" to_table="cook_food" >
-				<fk_column name="food_uid" pk="uuid" />
-			</fk>
-			<fk name="fk_cook_fatty_acids_cook_unit" to_schema="public" to_table="cook_unit" >
-				<fk_column name="unit_uid" pk="uuid" />
-			</fk>
-		</table>
-		<table name="cook_fatty_description" >
-			<column name="uuid" type="uuid" decimal="0" jt="1111" mandatory="y" >
-				<defo>uuid_generate_v4()</defo>
-			</column>
-			<column name="name" type="varchar" length="100" decimal="0" jt="12" mandatory="y" />
-			<column name="lang_code" type="varchar" length="20" decimal="0" jt="12" />
-			<column name="fatty_uid" type="uuid" decimal="0" jt="1111" mandatory="y" />
-			<index name="pk_table_uuid" unique="PRIMARY_KEY" >
-				<column name="uuid" />
-			</index>
-			<fk name="fk_cook_fatty_description_uid" to_schema="public" to_table="cook_fatty_acids" >
-				<fk_column name="fatty_uid" pk="uuid" />
-			</fk>
-			<fk name="fk_cook_fatty_description_lang" to_schema="public" to_table="cook_language" >
-				<fk_column name="lang_code" pk="code" />
+			<fk name="fk_cook_component_description_uid" to_schema="public" to_table="cook_component" >
+				<fk_column name="component_uid" pk="uuid" />
 			</fk>
 		</table>
 		<table name="cook_food" >
@@ -198,6 +78,38 @@
 			</fk>
 			<fk name="fk_cook_food_group_cook_group" to_schema="public" to_table="cook_group" >
 				<fk_column name="group_uid" pk="uuid" />
+			</fk>
+		</table>
+		<table name="cook_grid" >
+			<column name="uuid" type="uuid" jt="1111" mandatory="y" >
+				<defo>uuid_generate_v4()</defo>
+			</column>
+			<column name="value_of" type="real" jt="7" >
+				<defo>0</defo>
+			</column>
+			<column name="recommend_value" type="real" jt="7" >
+				<defo>0</defo>
+			</column>
+			<column name="component_uid" type="uuid" jt="1111" mandatory="y" />
+			<column name="unit_uid" type="uuid" jt="1111" mandatory="y" />
+			<column name="food_uid" type="uuid" jt="1111" mandatory="y" />
+			<column name="created_at" type="timestamptz" jt="93" >
+				<defo>current_timestamp</defo>
+			</column>
+			<column name="updated_at" type="timestamptz" jt="93" >
+				<defo>current_timestamp</defo>
+			</column>
+			<index name="pk_cook_grid_uuid" unique="PRIMARY_KEY" >
+				<column name="uuid" />
+			</index>
+			<fk name="fk_cook_grid_cook_component" to_schema="public" to_table="cook_component" >
+				<fk_column name="component_uid" pk="uuid" />
+			</fk>
+			<fk name="fk_cook_grid_cook_food" to_schema="public" to_table="cook_food" >
+				<fk_column name="food_uid" pk="uuid" />
+			</fk>
+			<fk name="fk_cook_grid_cook_unit" to_schema="public" to_table="cook_unit" >
+				<fk_column name="unit_uid" pk="uuid" />
 			</fk>
 		</table>
 		<table name="cook_group" >
@@ -267,96 +179,6 @@
 				<fk_column name="lang_uid" pk="uuid" />
 			</fk>
 		</table>
-		<table name="cook_macro_component" >
-			<column name="uuid" type="uuid" decimal="0" jt="1111" mandatory="y" >
-				<defo>uuid_generate_v4()</defo>
-			</column>
-			<column name="for_value" type="real" length="8" decimal="8" jt="7" >
-				<defo>0</defo>
-			</column>
-			<column name="recomendation" type="real" length="8" decimal="8" jt="7" >
-				<defo>0</defo>
-			</column>
-			<column name="unit_uid" type="uuid" decimal="0" jt="1111" mandatory="y" />
-			<column name="food_uid" type="uuid" decimal="0" jt="1111" mandatory="y" />
-			<column name="created_at" type="timestamptz" length="35" decimal="6" jt="93" >
-				<defo>CURRENT_TIMESTAMP</defo>
-			</column>
-			<column name="updated_at" type="timestamptz" length="35" decimal="6" jt="93" >
-				<defo>CURRENT_TIMESTAMP</defo>
-			</column>
-			<index name="pk_cook_macro_component_uuid" unique="PRIMARY_KEY" >
-				<column name="uuid" />
-			</index>
-			<fk name="fk_cook_macro_component_uid" to_schema="public" to_table="cook_food" >
-				<fk_column name="food_uid" pk="uuid" />
-			</fk>
-			<fk name="fk_cook_macro_component" to_schema="public" to_table="cook_unit" >
-				<fk_column name="unit_uid" pk="uuid" />
-			</fk>
-		</table>
-		<table name="cook_macro_description" >
-			<column name="uuid" type="uuid" decimal="0" jt="1111" mandatory="y" >
-				<defo>uuid_generate_v4()</defo>
-			</column>
-			<column name="name" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
-			<column name="lang_code" type="varchar" length="20" decimal="0" jt="12" mandatory="y" />
-			<column name="macro_uid" type="uuid" decimal="0" jt="1111" mandatory="y" />
-			<index name="pk_cook_macro_description_uuid" unique="PRIMARY_KEY" >
-				<column name="uuid" />
-			</index>
-			<fk name="fk_cook_macro_description_lang" to_schema="public" to_table="cook_language" >
-				<fk_column name="lang_code" pk="code" />
-			</fk>
-			<fk name="fk_cook_macro_description_uid" to_schema="public" to_table="cook_macro_component" >
-				<fk_column name="macro_uid" pk="uuid" />
-			</fk>
-		</table>
-		<table name="cook_mineral" >
-			<column name="uuid" type="uuid" decimal="0" jt="1111" mandatory="y" >
-				<defo>uuid_generate_v4()</defo>
-			</column>
-			<column name="for_value" type="real" length="8" decimal="8" jt="7" >
-				<defo>0</defo>
-			</column>
-			<column name="recommendation" type="real" length="8" decimal="8" jt="7" >
-				<defo>0</defo>
-			</column>
-			<column name="food_uid" type="uuid" decimal="0" jt="1111" mandatory="y" />
-			<column name="unit_uid" type="uuid" decimal="0" jt="1111" mandatory="y" />
-			<column name="created_at" type="timestamptz" length="35" decimal="6" jt="93" >
-				<defo>CURRENT_TIMESTAMP</defo>
-			</column>
-			<column name="updated_at" type="timestamptz" length="35" decimal="6" jt="93" >
-				<defo>CURRENT_TIMESTAMP</defo>
-			</column>
-			<index name="pk_cook_mineral_uuid" unique="PRIMARY_KEY" >
-				<column name="uuid" />
-			</index>
-			<fk name="fk_cook_mineral_cook_food" to_schema="public" to_table="cook_food" >
-				<fk_column name="food_uid" pk="uuid" />
-			</fk>
-			<fk name="fk_cook_mineral_cook_unit" to_schema="public" to_table="cook_unit" >
-				<fk_column name="unit_uid" pk="uuid" />
-			</fk>
-		</table>
-		<table name="cook_mineral_description" >
-			<column name="uuid" type="uuid" decimal="0" jt="1111" mandatory="y" >
-				<defo>uuid_generate_v4()</defo>
-			</column>
-			<column name="name" type="varchar" length="255" decimal="0" jt="12" />
-			<column name="lang_code" type="varchar" length="20" decimal="0" jt="12" />
-			<column name="mineral_uid" type="uuid" decimal="0" jt="1111" mandatory="y" />
-			<index name="pk_cook_mineral_description_uuid" unique="PRIMARY_KEY" >
-				<column name="uuid" />
-			</index>
-			<fk name="fk_cook_mineral_description_lang" to_schema="public" to_table="cook_language" >
-				<fk_column name="lang_code" pk="code" />
-			</fk>
-			<fk name="fk_cook_mineral_description_uid" to_schema="public" to_table="cook_mineral" >
-				<fk_column name="mineral_uid" pk="uuid" />
-			</fk>
-		</table>
 		<table name="cook_unit" >
 			<column name="uuid" type="uuid" decimal="0" jt="1111" mandatory="y" >
 				<defo>uuid_generate_v4()</defo>
@@ -389,74 +211,21 @@
 				<fk_column name="unit_uid" pk="uuid" />
 			</fk>
 		</table>
-		<table name="cook_vitamin" >
-			<column name="uuid" type="uuid" decimal="0" jt="1111" mandatory="y" >
-				<defo>uuid_generate_v4()</defo>
-			</column>
-			<column name="for_value" type="real" length="8" decimal="8" jt="7" >
-				<defo>0</defo>
-			</column>
-			<column name="recommendation" type="real" length="8" decimal="8" jt="7" >
-				<defo>0</defo>
-			</column>
-			<column name="unit_uid" type="uuid" decimal="0" jt="1111" mandatory="y" />
-			<column name="food_uid" type="uuid" decimal="0" jt="1111" mandatory="y" />
-			<column name="created_at" type="timestamptz" length="35" decimal="6" jt="93" >
-				<defo>CURRENT_TIMESTAMP</defo>
-			</column>
-			<column name="updated_at" type="timestamptz" length="35" decimal="6" jt="93" >
-				<defo>CURRENT_TIMESTAMP</defo>
-			</column>
-			<index name="pk_cook_vitamin_uuid" unique="PRIMARY_KEY" >
-				<column name="uuid" />
-			</index>
-			<fk name="fk_cook_vitamin_cook_food" to_schema="public" to_table="cook_food" >
-				<fk_column name="food_uid" pk="uuid" />
-			</fk>
-			<fk name="fk_cook_vitamin_cook_unit" to_schema="public" to_table="cook_unit" >
-				<fk_column name="unit_uid" pk="uuid" />
-			</fk>
-		</table>
-		<table name="cook_vitamin_description" >
-			<column name="uuid" type="uuid" decimal="0" jt="1111" mandatory="y" >
-				<defo>uuid_generate_v4()</defo>
-			</column>
-			<column name="name" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
-			<column name="lang_code" type="varchar" length="20" decimal="0" jt="12" mandatory="y" />
-			<column name="vitamin_uid" type="uuid" decimal="0" jt="1111" mandatory="y" />
-			<index name="pk_cook_vitamin_description_uuid" unique="PRIMARY_KEY" >
-				<column name="uuid" />
-			</index>
-			<fk name="fk_cook_vitamin_description_lang" to_schema="public" to_table="cook_language" >
-				<fk_column name="lang_code" pk="code" />
-			</fk>
-			<fk name="fk_cook_vitamin_description_uid" to_schema="public" to_table="cook_vitamin" >
-				<fk_column name="vitamin_uid" pk="uuid" />
-			</fk>
-		</table>
 	</schema>
 	<connector name="PostgreSQL" database="PostgreSQL" driver_class="org.postgresql.Driver" driver_jar="postgresql-42.2.5.jar" driver_desc="Standard" host="localhost" port="5432" instance="cookyer" user="postgres" />
 	<layout name="Default Layout" id="Layout_323f3a8" show_relation="columns" >
-		<entity schema="public" name="cook_cholesterol" color="3986C1" x="736" y="848" />
-		<entity schema="public" name="cook_cholesterol_description" color="3986C1" x="976" y="848" />
-		<entity schema="public" name="cook_energy" color="3986C1" x="944" y="336" />
-		<entity schema="public" name="cook_energy_distribution" color="3986C1" x="944" y="48" />
-		<entity schema="public" name="cook_fatty_acids" color="3986C1" x="304" y="400" />
-		<entity schema="public" name="cook_fatty_description" color="3986C1" x="48" y="656" />
-		<entity schema="public" name="cook_food" color="3986C1" x="528" y="656" />
-		<entity schema="public" name="cook_food_description" color="3986C1" x="320" y="880" />
-		<entity schema="public" name="cook_food_group" color="3986C1" x="560" y="1104" />
-		<entity schema="public" name="cook_group" color="3986C1" x="784" y="1104" />
-		<entity schema="public" name="cook_group_description" color="3986C1" x="992" y="1104" />
-		<entity schema="public" name="cook_language" color="3986C1" x="320" y="656" />
-		<entity schema="public" name="cook_language_description" color="3986C1" x="48" y="880" />
-		<entity schema="public" name="cook_macro_component" color="3986C1" x="528" y="400" />
-		<entity schema="public" name="cook_macro_description" color="3986C1" x="272" y="192" />
-		<entity schema="public" name="cook_mineral" color="3986C1" x="944" y="592" />
-		<entity schema="public" name="cook_mineral_description" color="3986C1" x="1184" y="384" />
-		<entity schema="public" name="cook_unit" color="3986C1" x="736" y="656" />
-		<entity schema="public" name="cook_unit_description" color="3986C1" x="528" y="176" />
-		<entity schema="public" name="cook_vitamin" color="3986C1" x="1184" y="592" />
-		<entity schema="public" name="cook_vitamin_description" color="3986C1" x="1424" y="592" />
+		<entity schema="public" name="cook_food" color="3986C1" x="288" y="272" />
+		<entity schema="public" name="cook_food_description" color="3986C1" x="48" y="48" />
+		<entity schema="public" name="cook_food_group" color="3986C1" x="288" y="80" />
+		<entity schema="public" name="cook_group" color="3986C1" x="512" y="80" />
+		<entity schema="public" name="cook_group_description" color="3986C1" x="720" y="64" />
+		<entity schema="public" name="cook_language" color="3986C1" x="80" y="272" />
+		<entity schema="public" name="cook_language_description" color="3986C1" x="80" y="496" />
+		<entity schema="public" name="cook_unit" color="3986C1" x="736" y="272" />
+		<entity schema="public" name="cook_unit_description" color="3986C1" x="944" y="272" />
+		<entity schema="public" name="cook_component" color="C1D8EE" x="736" y="544" />
+		<entity schema="public" name="cook_component_description" color="C1D8EE" x="944" y="544" />
+		<entity schema="public" name="cook_grid" color="C1D8EE" x="496" y="272" />
+		<script name="upgrade.sql" id="Editor_32cccd" language="SQL" confirmed="y" file="file:/Users/miguelramos/Public/cookyer-workspace/packages/database/upgrade.sql" />
 	</layout>
 </project>

@@ -1,0 +1,59 @@
+openapi: 3.0.0
+info:
+  title: Cookyer
+  version: '1.0'
+  description: Cook receipts
+  contact:
+    name: Miguel Ramos
+  license:
+    name: MIT
+servers:
+  - url: 'http://localhost:3100'
+paths:
+  /languages:
+    get:
+      summary: Get all languages
+      tags:
+        - i18n
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: ./models/language.v1.yaml
+              examples:
+                Response example:
+                  - uuid: 613022a3-aec6-4ff0-9ecb-9b019de87e6b
+                    code: pt
+                    name: Portugues
+                    createdAt: '2019-08-23 23:44:32.289733'
+                    updatedAt: '2019-08-23 23:44:32.289733'
+                  - uuid: 3119edf4-4a69-456f-baea-42f49612e2bf
+                    code: en
+                    name: English
+                    createdAt: '2019-08-23 23:44:32.289733'
+                    updatedAt: '2019-08-23 23:44:32.289733'
+      description: Language resource
+    post:
+      summary: Add new language
+      tags:
+        - i18n
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ./models/language.v1.yaml
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ./models/language.v1.yaml
+        description: Language resource
+      description: Create language resource
+components:
+  schemas: {}

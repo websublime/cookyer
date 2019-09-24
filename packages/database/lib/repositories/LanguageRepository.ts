@@ -17,17 +17,15 @@ export class LanguageRepository {
       });
   }
 
-  async findAll(
-    orderBy = 'updated_at',
-    orderDirection = 'ASC',
-    page = 0,
-    limit = 20
-  ) {
+  async findAll(orderBy = 'updated_at', orderDirection = 'ASC', page = 0, limit = 20) {
     return await Language.query()
+      .select([
+        'cook_language.*',
+        Language.relatedQuery('descriptor')
+          .select('name')
+          .as('language'),
+      ])
       .orderBy(orderBy, orderDirection)
-      .modifyEager('descriptor', builder => {
-        builder.select('name');
-      })
       .page(page, limit);
   }
 

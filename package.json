@@ -8,7 +8,10 @@
     "lerna": "lerna",
     "clean": "lerna clean -y && lerna bootstrap",
     "start": "lerna run start:dev --stream --parallel",
+    "build": "lerna run build --stream --parallel",
     "start:admin": "lerna run --no-prefix --stream --scope @cookyer/admin start:dev",
+    "start:db": "lerna run --no-prefix --stream --scope @cookyer/database start:dev",
+    "start:rest": "lerna run --no-prefix --stream --scope @cookyer/rest start:dev",
     "test": "lerna run test --stream --parallel",
     "test:db": "lerna run --no-prefix --stream --scope @cookyer/database test"
   },
