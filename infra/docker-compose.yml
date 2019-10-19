@@ -70,3 +70,28 @@ services:
       - frontend
       - backend
     container_name: minio
+
+  couchbase:
+    container_name: couchbase
+    image: couchbase/server:community-6.0.0
+    volumes:
+      - ${DATA_PATH_HOST}/couchbase/var
+    networks:
+      - backend
+    ports:
+      - 8091:8091
+      - 8092:8092
+      - 8093:8093
+      - 8094:8094
+      - 11210:11210
+    ulimits:
+      nproc: 65535
+      core:
+        soft: 100000000
+        hard: 100000000
+      memlock:
+        soft: 100000000
+        hard: 100000000
+      nofile:
+        soft: 40960
+        hard: 40960

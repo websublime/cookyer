@@ -35,4 +35,10 @@ describe('> Food Repository', () => {
 
     expect(rs).toEqual(food);
   });
+
+  it('# Should find all foods', async () => {
+    const rs = await repository.findAll();
+
+    expect(rs.total).toBeGreaterThan(0);
+  });
 });

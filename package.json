@@ -16,19 +16,21 @@
     "test:db": "lerna run --no-prefix --stream --scope @cookyer/database test"
   },
   "devDependencies": {
-    "@types/node": "^12.7.2",
     "@types/jest": "22.2.3",
-    "@typescript-eslint/parser": "^2.3.1",
+    "@types/node": "^12.7.2",
     "@typescript-eslint/eslint-plugin": "^2.3.1",
-    "prettier": "^1.18.2",
+    "@typescript-eslint/parser": "^2.3.1",
+    "cross-env": "5.2.0",
+    "eslint": "6.1.0",
+    "eslint-config-airbnb": "18.0.1",
     "eslint-config-prettier": "^6.3.0",
     "eslint-plugin-prettier": "^3.1.1",
-    "eslint": "6.1.0",
+    "eslint-plugin-react-hooks": "^2.1.2",
     "jest": "^24.9.0",
-    "ts-jest": "24.0.2",
     "lerna": "^3.15.0",
-    "ts-node": "^8.3.0",
-    "cross-env": "5.2.0"
+    "prettier": "^1.18.2",
+    "ts-jest": "24.0.2",
+    "ts-node": "^8.3.0"
   },
   "dependencies": {
     "typescript": "^3.5.3"

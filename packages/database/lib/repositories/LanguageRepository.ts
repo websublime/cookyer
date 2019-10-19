@@ -1,16 +1,16 @@
-import { Language } from '../models/Language';
+import { LanguageModel } from '../models/LanguageModel';
 
 export class LanguageRepository {
   static query() {
-    return Language.query();
+    return LanguageModel.query();
   }
 
   static model() {
-    return Language;
+    return LanguageModel;
   }
 
   async findById(id: string) {
-    return await Language.query()
+    return await LanguageModel.query()
       .findById(id)
       .modifyEager('descriptor', builder => {
         builder.select('name');
@@ -18,10 +18,10 @@ export class LanguageRepository {
   }
 
   async findAll(orderBy = 'updated_at', orderDirection = 'ASC', page = 0, limit = 20) {
-    return await Language.query()
+    return await LanguageModel.query()
       .select([
         'cook_language.*',
-        Language.relatedQuery('descriptor')
+        LanguageModel.relatedQuery('descriptor')
           .select('name')
           .as('language'),
       ])
@@ -30,7 +30,7 @@ export class LanguageRepository {
   }
 
   async findByCode(code: string) {
-    return await Language.query()
+    return await LanguageModel.query()
       .where('code', '=', code)
       .first()
       .modifyEager('descriptor', builder => {
@@ -39,7 +39,7 @@ export class LanguageRepository {
   }
 
   async find(field: string, value: any, operator = '=', withRelated = true) {
-    let query = Language.query().where(field, operator, value);
+    let query = LanguageModel.query().where(field, operator, value);
 
     if (withRelated) {
       query = query.modifyEager('descriptor', builder => {

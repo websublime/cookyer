@@ -1,14 +1,13 @@
 import { Model } from 'objection';
 
-export class Language extends Model {
+export class FoodModel extends Model {
   readonly uuid?: string;
 
-  code?: string;
   created_at?: string;
   updated_at?: string;
 
   static get tableName() {
-    return 'cook_language';
+    return 'cook_food';
   }
 
   static get idColumn() {
@@ -22,22 +21,19 @@ export class Language extends Model {
   static relationMappings = {
     descriptor: {
       relation: Model.BelongsToOneRelation,
-      modelClass: 'LanguageDescription',
+      modelClass: 'FoodDescriptionModel',
       join: {
-        to: 'cook_language_description.lang_uid',
-        from: 'cook_language.uuid'
+        to: 'cook_food_description.food_uid',
+        from: 'cook_food.uuid'
       }
     }
   };
 
   static jsonSchema = {
     type: 'object',
-    required: ['code'],
 
     properties: {
       uuid: { type: 'string' },
-      code: { type: 'string', minLength: 1, maxLength: 10 },
-      iso: { type: 'string', minLength: 1, maxLength: 10 },
       created_at: { type: 'string' },
       updated_at: { type: 'string' }
     }

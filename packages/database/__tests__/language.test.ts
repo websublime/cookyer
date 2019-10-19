@@ -1,4 +1,4 @@
-import { Language } from '../lib/models/Language';
+import { LanguageModel } from '../lib/models/LanguageModel';
 import { getDatabaseConnection } from '../lib/connection';
 import { LanguageRepository } from '../lib/repositories/LanguageRepository';
 
@@ -29,7 +29,7 @@ describe('> Language Repository', () => {
 
   it('# Should get path', () => {
     const fromHere = resolve(__dirname, '../lib/models');
-    const fromProperty = resolve(Language.modelPaths[0]);
+    const fromProperty = resolve(LanguageModel.modelPaths[0]);
 
     expect(fromHere).toEqual(fromProperty);
   });

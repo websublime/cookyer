@@ -1,6 +1,6 @@
 import { Model } from 'objection';
 
-export class LanguageDescription extends Model {
+export class LanguageDescriptionModel extends Model {
   readonly uuid?: string;
 
   static get idColumn() {
@@ -18,10 +18,33 @@ export class LanguageDescription extends Model {
   static relationMappings = {
     language: {
       relation: Model.BelongsToOneRelation,
-      modelClass: 'Language',
+      modelClass: 'LanguageModel',
       join: {
         from: 'cook_language_description.lang_uid',
         to: 'cook_language.uuid'
+      }
+    }
+  };
+
+  static jsonSchema = {
+    type: 'object',
+
+    properties: {
+      lang_code: {
+        maxLength: 10,
+        minLength: 1,
+        type: 'string'
+      },
+      lang_uuid: {
+        type: 'string'
+      },
+      name: {
+        maxLength: 100,
+        minLength: 1,
+        type: 'string'
+      },
+      uuid: {
+        type: 'string'
       }
     }
   };
