@@ -2,9 +2,7 @@
   "name": "@cookyer/database",
   "version": "0.0.1",
   "description": "Cookyer database",
-  "keywords": [
-    "database"
-  ],
+  "keywords": ["database"],
   "author": "Miguel Ramos <miguel.marques.ramos@gmail.com>",
   "license": "ISC",
   "main": "dist/index.js",
@@ -13,16 +11,14 @@
     "lib": "lib",
     "test": "__tests__"
   },
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "publishConfig": {
     "access": "public"
   },
   "scripts": {
     "build": "cross-env NODE_ENV=production tsc -p tsconfig.json",
     "start:dev": "cross-env NODE_ENV=development tsc -w -p tsconfig.json",
-    "test": "cross-env NODE_ENV=testing jest --coverage"
+    "test": "cross-env NODE_ENV=testing jest --coverage --detectOpenHandles"
   },
   "dependencies": {
     "objection": "^1.6.9",
