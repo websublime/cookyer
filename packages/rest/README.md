@@ -7,6 +7,10 @@
 ```
 const rest = require('@cookyer/rest');
 
+Creating migration: knex migrate:make cook_grid
+
+Creating Seed: knex seed:make cook_grid
+
 // TODO: DEMONSTRATE API
 ```
 

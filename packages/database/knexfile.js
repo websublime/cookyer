@@ -44,7 +44,7 @@ module.exports = {
       directory: __dirname + '/lib/migrations'
     },
     seeds: {
-      directory: __dirname + '/lib/seeds/statging'
+      directory: __dirname + '/lib/seeds/staging'
     }
   },
 
