@@ -1,13 +1,13 @@
 import { Model } from 'objection';
 
-export class GroupModel extends Model {
+export class UnitModel extends Model {
   readonly uuid?: string;
 
   created_at?: string;
   updated_at?: string;
 
   static get tableName() {
-    return 'cook_group';
+    return 'cook_unit';
   }
 
   static get idColumn() {
@@ -21,22 +21,10 @@ export class GroupModel extends Model {
   static relationMappings = {
     descriptor: {
       relation: Model.BelongsToOneRelation,
-      modelClass: 'GroupDescriptionModel',
+      modelClass: 'UnitDescriptionModel',
       join: {
-        to: 'cook_group_description.group_uid',
-        from: 'cook_group.uuid'
-      }
-    },
-    foods: {
-      relation: Model.ManyToManyRelation,
-      modelClass: 'FoodDescriptionModel',
-      join: {
-        from: 'cook_group.uuid',
-        through: {
-          from: 'cook_food_group.group_uid',
-          to: 'cook_food_group.food_uid'
-        },
-        to: 'cook_food_description.food_uid'
+        to: 'cook_unit_description.unit_uid',
+        from: 'cook_unit.uuid'
       }
     }
   };

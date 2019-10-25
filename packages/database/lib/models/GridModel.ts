@@ -1,13 +1,13 @@
 import { Model } from 'objection';
 
-export class GroupModel extends Model {
+export class GridModel extends Model {
   readonly uuid?: string;
 
   created_at?: string;
   updated_at?: string;
 
   static get tableName() {
-    return 'cook_group';
+    return 'cook_grid';
   }
 
   static get idColumn() {
@@ -19,24 +19,28 @@ export class GroupModel extends Model {
   }
 
   static relationMappings = {
-    descriptor: {
+    component: {
       relation: Model.BelongsToOneRelation,
-      modelClass: 'GroupDescriptionModel',
+      modelClass: 'ComponentDescriptionModel',
       join: {
-        to: 'cook_group_description.group_uid',
-        from: 'cook_group.uuid'
+        to: 'cook_component_description.component_uid',
+        from: 'cook_grid.component_uid'
       }
     },
-    foods: {
-      relation: Model.ManyToManyRelation,
+    unit: {
+      relation: Model.BelongsToOneRelation,
+      modelClass: 'UnitDescriptionModel',
+      join: {
+        to: 'cook_unit_description.unit_uid',
+        from: 'cook_grid.unit_uid'
+      }
+    },
+    food: {
+      relation: Model.BelongsToOneRelation,
       modelClass: 'FoodDescriptionModel',
       join: {
-        from: 'cook_group.uuid',
-        through: {
-          from: 'cook_food_group.group_uid',
-          to: 'cook_food_group.food_uid'
-        },
-        to: 'cook_food_description.food_uid'
+        to: 'cook_food_description.food_uid',
+        from: 'cook_grid.food_uid'
       }
     }
   };
@@ -46,6 +50,11 @@ export class GroupModel extends Model {
 
     properties: {
       uuid: { type: 'string' },
+      value_of: {type: 'number'},
+      recommend_value: {type: 'number'},
+      component_uid: {type: 'string'},
+      unit_uid: {type: 'string'},
+      food_uid: {type: 'string'},
       created_at: { type: 'string' },
       updated_at: { type: 'string' }
     }

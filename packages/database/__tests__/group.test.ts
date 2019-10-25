@@ -17,6 +17,7 @@ describe('> Group Repository', () => {
         min: 2,
         max: 10,
       },
+      debug: true
     });
 
     repository = new GroupRepository();
@@ -37,5 +38,11 @@ describe('> Group Repository', () => {
     const rs = await repository.findAll();
 
     expect(rs.total).toBeGreaterThan(0);
+  });
+
+  it('# Should find food by group', async () => {
+    const rs = await repository.findFoodByGroup();
+    console.log(rs);
+    expect(true).toBeTruthy();
   });
 });

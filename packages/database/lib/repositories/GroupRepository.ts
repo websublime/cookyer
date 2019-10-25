@@ -37,4 +37,15 @@ export class GroupRepository {
       .orderBy(orderBy, orderDirection)
       .page(page, limit);
   }
+
+  async findFoodByGroup(lang = 'pt') {
+    /*return await GroupModel.query()
+      .joinRelation('[descriptor, foods]')
+      .select('cook_group.uuid', 'descriptor.name', 'cook_group.created_at', 'cook_group.updated_at', 'foods')
+      .where('descriptor.lang_code', lang);*/
+
+      return await GroupModel.query()
+        .eager('[descriptor, foods]')
+        .select('cook_group.uuid', 'descriptor.name', 'cook_group.created_at', 'cook_group.updated_at')
+  }
 }

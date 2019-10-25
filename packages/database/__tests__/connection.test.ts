@@ -5,7 +5,7 @@ const dbSettings: Knex.Config = {
   client: 'pg',
   connection: {
     host: 'localhost',
-    user: 'miguelramos',
+    user: 'postgres',
     password: '',
     database: 'cookyer'
   },
