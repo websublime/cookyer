@@ -1,4 +1,5 @@
 import { GroupModel } from '../models/GroupModel';
+import { FoodGroupModel } from '../models/FoodGroupModel';
 
 export class GroupRepository {
   static query() {
@@ -10,12 +11,12 @@ export class GroupRepository {
   }
 
   async findById(id: string, lang = 'pt') {
-    return await GroupModel.query()
+    return (await GroupModel.query()
       .select('cook_group.uuid', 'descriptor.name')
       .joinRelation('descriptor')
       .where('cook_group.uuid', id)
       .where('descriptor.lang_code', lang)
-      .first() as GroupModel;
+      .first()) as GroupModel;
 
     /*return await Food.query()
       .select(
@@ -38,14 +39,22 @@ export class GroupRepository {
       .page(page, limit);
   }
 
-  async findFoodByGroup(lang = 'pt') {
-    /*return await GroupModel.query()
-      .joinRelation('[descriptor, foods]')
-      .select('cook_group.uuid', 'descriptor.name', 'cook_group.created_at', 'cook_group.updated_at', 'foods')
-      .where('descriptor.lang_code', lang);*/
+  async findFoodByGroupId(id: string, lang = 'pt', page = 0, limit = 20) {
+    const group = GroupModel.query()
+      .page(page, limit)
+      .joinRelation('[descriptor]')
+      .select('cook_group.uuid', 'descriptor.name', 'cook_group.created_at', 'cook_group.updated_at')
+      .where('descriptor.lang_code', lang)
+      .where('cook_group.uuid', id);
 
-      return await GroupModel.query()
-        .eager('[descriptor, foods]')
-        .select('cook_group.uuid', 'descriptor.name', 'cook_group.created_at', 'cook_group.updated_at')
+    return await group.joinEager('foods(foodSelect)', {
+      foodSelect: builder => {
+        builder.select(
+          'cook_food_description.name',
+          'cook_food_description.description',
+          'cook_food_description.food_uid'
+        );
+      },
+    });
   }
 }

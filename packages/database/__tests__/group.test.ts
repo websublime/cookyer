@@ -1,5 +1,6 @@
 import { getDatabaseConnection } from '../lib/connection';
 import { GroupRepository } from '../lib/repositories/GroupRepository';
+import { inspect } from 'util';
 
 describe('> Group Repository', () => {
   let repository: GroupRepository;
@@ -17,7 +18,7 @@ describe('> Group Repository', () => {
         min: 2,
         max: 10,
       },
-      debug: true
+      debug: true,
     });
 
     repository = new GroupRepository();
@@ -28,7 +29,7 @@ describe('> Group Repository', () => {
 
     const group = {
       uuid: '92c24a83-31c0-44b7-b223-c0966da27f3d',
-      name: 'Frutas'
+      name: 'Frutas',
     };
 
     expect(rs).toEqual(group);
@@ -41,8 +42,8 @@ describe('> Group Repository', () => {
   });
 
   it('# Should find food by group', async () => {
-    const rs = await repository.findFoodByGroup();
-    console.log(rs);
-    expect(true).toBeTruthy();
+    const rs: any = await repository.findFoodByGroupId('92c24a83-31c0-44b7-b223-c0966da27f3d');
+    console.log(inspect(rs, { depth: null, colors: true }));
+    expect(rs.total > 1).toBeTruthy();
   });
 });
