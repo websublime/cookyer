@@ -1,5 +1,4 @@
 import { GroupModel } from '../models/GroupModel';
-import { FoodGroupModel } from '../models/FoodGroupModel';
 
 export class GroupRepository {
   static query() {

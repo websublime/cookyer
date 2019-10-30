@@ -1,6 +1,5 @@
 import { getDatabaseConnection } from '../lib/connection';
 import { GroupRepository } from '../lib/repositories/GroupRepository';
-import { inspect } from 'util';
 
 describe('> Group Repository', () => {
   let repository: GroupRepository;
@@ -43,7 +42,7 @@ describe('> Group Repository', () => {
 
   it('# Should find food by group', async () => {
     const rs: any = await repository.findFoodByGroupId('92c24a83-31c0-44b7-b223-c0966da27f3d');
-    console.log(inspect(rs, { depth: null, colors: true }));
+
     expect(rs.total > 1).toBeTruthy();
   });
 });
